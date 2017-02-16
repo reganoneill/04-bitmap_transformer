@@ -9,5 +9,6 @@ bmp.type = bitmap.toString('utf-8', 0, 2);
 bmp.size = bitmap.readInt32LE(2);
 bmp.width = bitmap.readInt32LE(18);
 bmp.height = bitmap.readInt32LE(22);
+bmp.pixelArray = bitmap.readInt32LE('hex', 10);
 
 console.dir(bmp);
