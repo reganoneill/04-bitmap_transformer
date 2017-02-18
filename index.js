@@ -26,7 +26,7 @@ ee.on('objCreate', function(data) {
 });
 
 ee.on('transformObj', function(obj) {
-  bmpTransformer.isolateColors(obj);
+  bmpTransformer.isolateColors(obj, bmpTransformer.writeFile);
 });
 
 ee.emit('getFile');
