@@ -14,7 +14,7 @@ exports.ImageObj = function(buffer) {
   this.vertRez = buffer.readInt32LE(42);
   this.numColors = buffer.readInt32LE(46);
   this.imptColors = buffer.readInt32LE(50);
-  // this.firstColor = buffer.toSting('hex', 54, 58);
+  this.firstColor = buffer.toSting('hex', 54, 58);
   this.secondColor = buffer.readInt32LE(58);
   this.thirdColor = buffer.readInt32LE(62);
   // this.colorsArray = buffer.slice('54, 1079').reduce(function(acc, ele) {
@@ -23,4 +23,5 @@ exports.ImageObj = function(buffer) {
   //   }
   //   return acc;
   // }, []);
+  
 };

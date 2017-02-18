@@ -5,10 +5,6 @@ const ee = new EE();
 const fs = require('fs');
 const objConstructor = require(`${__dirname}/models/bitmap-object.js`).ImageObj;
 
-// ee.on('readBitmap', function() {
-//   return fs.readFile(`${__dirname}/assets/palette-bitmap.bmp`);
-// });
-
 ee.once('getFile', function() {
   fs.readFile(`${__dirname}/assets/palette-bitmap.bmp`, function(err, data) {
     if (err) throw err;
@@ -18,7 +14,7 @@ ee.once('getFile', function() {
 
 ee.on('objCreate', function(data) {
   let testObj = new objConstructor(data);
-  console.log('testObj:', testObj.colorsArray);
+  console.log('testObj:', testObj);
 });
 
 ee.emit('getFile');
