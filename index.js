@@ -1,20 +1,42 @@
 'use strict';
 
+const EE = require('events');
+const ee = new EE();
 const fs = require('fs');
-const bitmap = fs.readFileSync(`${__dirname}/assets/palette-bitmap.bmp`);
+const objConstructor = require(`${__dirname}/models/bitmap-object.js`).ImageObj;
+
+// ee.on('readBitmap', function() {
+//   return fs.readFile(`${__dirname}/assets/palette-bitmap.bmp`);
+// });
+
+ee.once('getFile', function() {
+  fs.readFile(`${__dirname}/assets/palette-bitmap.bmp`, function(err, data) {
+    if (err) throw err;
+    ee.emit('objCreate', data);
+  });
+});
+
+ee.on('objCreate', function(data) {
+  let testObj = new objConstructor(data);
+  console.log('testObj:', testObj.colorsArray);
+});
+
+ee.emit('getFile');
+
+// console.dir(testObj);
 
 // const bitmapUpdate = function(data) {
 //   fs.writeFileSync(`${__dirname}/assets/dana-bitmap.bmp`, data);
 // };
 
-const bmp = {};
-
-bmp.type = bitmap.toString('utf-8', 0, 2);
-bmp.size = bitmap.readInt32LE(2);
-bmp.width = bitmap.readInt32LE(18);
-bmp.height = bitmap.readInt32LE(22);
-bmp.numberOfColors = bitmap.readInt32LE(46);
-bmp.pixelArray = bitmap.readInt32LE(10);
+// const bmp = {};
+//
+// bmp.type = bitmap.toString('utf-8', 0, 2);
+// bmp.size = bitmap.readInt32LE(2);
+// bmp.width = bitmap.readInt32LE(18);
+// bmp.height = bitmap.readInt32LE(22);
+// bmp.numberOfColors = bitmap.readInt32LE(46);
+// bmp.pixelArray = bitmap.readInt32LE(10);
 // bmp.colorTable = bitmap.toString('hex', 54, 1078);
 // bmp.colorTable = bitmap.slice(54, 1079);
 // bmp.singleColor = bmp.colorTable.readInt32LE(4);
@@ -39,5 +61,3 @@ bmp.pixelArray = bitmap.readInt32LE(10);
 // bmp.imgConcat = bmp.imgHeader + bmp.imgBuffer;
 //
 // bmp.testBuffer(bitmapUpdate);
-
-console.dir(bmp);
