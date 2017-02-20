@@ -1,42 +1,46 @@
-![CF](https://camo.githubusercontent.com/70edab54bba80edb7493cad3135e9606781cbb6b/687474703a2f2f692e696d6775722e636f6d2f377635415363382e706e67) Lab 04: Bitmap Transformer - TEAM MEGATRON
-===
-Members: Khalid Mohamud, Dana Kulp, Regan O'Neill
+# BITMAP TRANSFORMER
+Built by TEAM MEGATRON - Khalid Mohamud, Dana Kulp, Regan O'Neill
 
-## To Submit this Assignment
-* have team leader fork this repository
-* have team leader add team members as collaborators to the team fork
-* team members should clone team fork
-* write all of your code in a directory name `bitmap-` + `<team name>` **e.g.** `bitmap-weasels`
-* submit a pull request to this repository when done
-* each person will submit a link to their own PR in canvas
-* each person write a question and observation on canvas
+This program utilizes node.js to read a bitmap data stream, manipulate the stream, and create a new bitmap image to the filesystem.
 
-#### Rubric:
-* **tests:** 3pts
-* **gulpfile/package.json:** 2pts
-* **read bitmap meta data:** 5pts
-* **successfully apply transforms:** 5pts
-* **project design and organization:** 5pts
+# Features Include:
 
-## Description
+  - Read bitmap data stream from operating system
+  - copy data as Buffer object and transform into different data structures in order to transform image.
+  - use object constructor to allow metadata to persist and be reused within application
+  - utilize three methods to transform the original file:
+        1) INVERT COLORS
+        [Imgur](http://i.imgur.com/GPZ8S8J.png)
+        2) GREENSCALE IMAGE
+        [Imgur](http://i.imgur.com/vQXy11e.png)
+        3) GRAYSCALE IMAGE
+        [Imgur](http://i.imgur.com/W2Tu028.png)
 
-For this assignment you will be building a bitmap (`.bmp`) reader and transformer. It will read a bitmap in from disk, run one or more color transforms on the bitmap and then write it out to a new file. This project will require the use of node buffers in order to manipulate binary data. Your project should include tests, as well as a `gulpfile.js`, `package.json`, `.eslintrc`, `README.md`, and a `.gitignore`. Make sure to run all your code through eslint. The process will look something like this:
+You can also:
+  - Run individual methods directly from the CLI to create one (or more) new bitmap files.
+  - run automation testing tools with gulp
 
-1. open the original bitmap file using fs and read it into a buffer
-2. convert the buffer header data into a Javascript Object (using constructors)
-3. run a transform on the buffer directly
-4. write the buffer to a new file
+### Tech
 
-The wikipedia article found here [Bitmap Specification](https://en.wikipedia.org/wiki/BMP_file_format) describes the byte specification of a "windows bitmap file." We'll be working with the simplest version, meaning no compression.
+* [node.js] - evented I/O for the backend
+* [Gulp] - the streaming build system
 
-* your project should have three ***(or more)*** transforms
-* invert the colors (***hint:*** subtract every color value from the max color value which is 255),
-* grayscale the colors (***hint:*** multiply each color value by a constant, just make sure your values don't go over 255)
-* (red|green|blue)scale the colors (***hint:*** same as above but only multiply one of the colors)
+### Installation
 
-## Bonus:
+Bitmap Transformer requires [Node.js](https://nodejs.org/) v6+ to run.
 
-* ability to handle various sized bitmap
-* ability to handle LE and BE computers with a single if statement
-* utilizes a command line interface (CLI)
-* CLI can select the transforms
+Install the dependencies and devDependencies and start the server.
+
+```sh
+$ cd bitmap-megatron
+$ npm i
+$ node index
+[optional single commands include: 'invert', 'grayscale', 'greenscale']
+```
+License
+----
+
+MIT
+
+
+**Free Software, Hell Yeah!**
