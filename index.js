@@ -6,6 +6,8 @@ const ee = new EE();
 const fs = require('fs');
 const objConstructor = require(`${__dirname}/models/bitmap-object.js`).ImageObj;
 const bmpTransformer = require(`${__dirname}/lib/bitmap-transform.js`);
+const greenScale = require(`${__dirname}/lib/bitmap-greenscale.js`);
+const reWrite = require(`${__dirname}/lib/fs-write-file.js`);
 
 // var arr = [];
 
@@ -26,7 +28,8 @@ ee.on('objCreate', function(data) {
 });
 
 ee.on('transformObj', function(obj) {
-  bmpTransformer.invertColors(obj, bmpTransformer.writeFile);
+  bmpTransformer.invertColors(obj, reWrite);
+  greenScale(obj);
 });
 
 ee.emit('getFile');
