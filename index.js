@@ -5,8 +5,9 @@ const EE = require('events');
 const ee = new EE();
 const fs = require('fs');
 const objConstructor = require(`${__dirname}/models/bitmap-object.js`).ImageObj;
-const bmpTransformer = require(`${__dirname}/lib/bitmap-transform.js`);
-
+const invert = require(`${__dirname}/lib/bitmap-transform.js`);
+const greenScale = require(`${__dirname}/lib/bitmap-greenscale.js`);
+const grayScale = require(`${__dirname}/lib/bitmap-grayscale.js`);
 // var arr = [];
 
 // var newColorzzz = bmp.colorTable.match(/\w{8}/g).forEach(grp => (arr).push(grp.replace(/^\w{2}/g, '00')));
@@ -26,7 +27,9 @@ ee.on('objCreate', function(data) {
 });
 
 ee.on('transformObj', function(obj) {
-  bmpTransformer.isolateColors(obj, bmpTransformer.writeFile);
+  invert(obj);
+  grayScale(obj);
+  greenScale(obj);
 });
 
 ee.emit('getFile');
